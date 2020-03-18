@@ -1,7 +1,7 @@
 <template>
   <div id='home'>
     <header>
-      <p>blog</p>
+      <p>blog-admin</p>
     </header>
     <section>
       <div id="productList"

@@ -55,7 +55,7 @@ export default {
                 type: 'success'
               })
               setTimeout(() => {
-                this.$router.push({path: '/login'});
+                this.$router.push({path: '/error'});
               }, 500);
             } else {
               this.$message({

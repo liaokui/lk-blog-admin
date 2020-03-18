@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <% if (htmlWebpackPlugin.options.environment === 'production') { %>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>window.axios || document.write('<script src="<%= BASE_URL %>js/axios.min.js"><\/script>')</script> 
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>window.Vue || document.write('<script src="<%= BASE_URL %>js/vue.min.js"><\/script>')</script> 
+    <!-- vue-router -->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>window.VueRouter || document.write('<script src="<%= BASE_URL %>js/vue-router.min.js"><\/script>')</script> 
+    <% } %>
   </head>
   <body>
     <noscript>

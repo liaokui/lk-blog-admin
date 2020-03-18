@@ -8,10 +8,15 @@ const Error = () => import('../views/error/error.vue')
 
 Vue.use(Router)
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
+  base: '/admin/',
   routes: [
     {
-      path: '/',
+      path: '/', 
+      redirect: '/home'
+    },
+    {
+      path: '/home',
       name: 'home',
       component: Home,
       children: [
