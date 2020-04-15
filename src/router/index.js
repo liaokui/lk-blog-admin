@@ -12,7 +12,6 @@ const ArticleEdit = () => import('../views/article/edit.vue')
 const Project = () => import('../views/project/project.vue')
 const ProjectEdit = () => import('../views/project/edit.vue')
 const Message = () => import('../views/message/message.vue')
-const MessageEdit = () => import('../views/message/edit.vue')
 
 
 
@@ -130,24 +129,6 @@ export default new Router({
                 link: '/manage/message'
                }
              ]
-          },
-        },
-        {
-          path: 'message/edit',
-          name: 'messageEdit',
-          component: MessageEdit,
-          meta: {
-            belong: 'message',
-            navigation: [
-              {
-                label: '留言',
-                link: '/manage/message'
-              },
-              {
-                label: '添加',
-                link: '/manage/message/edit'
-              }
-            ]
           },
         }
       ]

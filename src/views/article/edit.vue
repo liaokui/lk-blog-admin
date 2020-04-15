@@ -13,8 +13,6 @@
           </el-form-item>
         </el-col>  
       </el-row>  
-      
-     
       <el-form-item label="标签:" prop="tag">
         <el-select v-model="editForm.tag" multiple placeholder="请选择" style="width: 100%">
           <el-option

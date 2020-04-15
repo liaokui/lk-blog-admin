@@ -1,0 +1,12 @@
+#tag {
+  padding: 20px;
+  .tagList {
+    width: 800px;
+    padding: 5px 20px 20px 5px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    span, button, div {
+      margin: 15px 0 0 15px;
+    }
+  }
+}

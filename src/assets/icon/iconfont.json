@@ -6,6 +6,20 @@
   "description": "个人博客hou'ta",
   "glyphs": [
     {
+      "icon_id": "7674885",
+      "name": "链接",
+      "font_class": "link",
+      "unicode": "e715",
+      "unicode_decimal": 59157
+    },
+    {
+      "icon_id": "836610",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e718",
+      "unicode_decimal": 59160
+    },
+    {
       "icon_id": "9370342",
       "name": "留言 2-4-2",
       "font_class": "message",

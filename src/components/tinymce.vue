@@ -1,5 +1,5 @@
 <template>
-	<div class="tinymce-box">
+	<div id="tinymce">
 		<editor v-model="myValue"
       :id="tinymceId"
       :init="init"
@@ -168,37 +168,10 @@ export default {
 }
 	
 </script>
-<style scoped>
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<style rel='stylesheet/scss' lang='scss'>
+  #tinymce{
+    .el-dialog__body {
+        padding: 0px 20px 10px 20px;
+    }
+  }
 </style>
