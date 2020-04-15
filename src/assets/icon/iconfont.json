@@ -1,0 +1,44 @@
+{
+  "id": "1746519",
+  "name": "lk-blog-admin",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "个人博客hou'ta",
+  "glyphs": [
+    {
+      "icon_id": "9370342",
+      "name": "留言 2-4-2",
+      "font_class": "message",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "11124968",
+      "name": "文章",
+      "font_class": "article",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "493510",
+      "name": "标签",
+      "font_class": "tag",
+      "unicode": "e7ad",
+      "unicode_decimal": 59309
+    },
+    {
+      "icon_id": "5121525",
+      "name": "项目",
+      "font_class": "project",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "5269211",
+      "name": "数据",
+      "font_class": "home",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    }
+  ]
+}

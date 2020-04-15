@@ -1,0 +1,112 @@
+#manage{
+  width: 100%;
+  height: 100vh;
+  .menu {
+    // width: 210px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #304156;
+    .title {
+      height: 80px;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 80px;
+      overflow: hidden;
+      box-shadow: inset 0 -1px 0 rgba( 255, 255, 250, 0.2), 
+            inset 0 -2px 0 rgba( 0, 0, 0, 0.1);
+    }
+    .menuIcon {
+      margin-right: 20px;
+    }
+  }
+  .main {
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    .header {
+      width: 100%;
+      height: 48px;
+      padding: 4px 20px;
+      line-height: 40px;
+      box-shadow: inset 0 -1px 0 rgba( 255, 255, 250, 0.2), inset 0 -1px 0 rgba( 0, 0, 0, 0.1);
+      .leftItem {
+        float: left;
+        line-height: 30px;
+      }
+      .rightItem {
+        float: right;
+        line-height: 30px;
+      }
+      .collapseBtn {
+        margin-right: 20px;
+        i {
+          display: block;
+          font-size: 24px;
+          line-height: 30px;
+          cursor: pointer;
+        }
+      }
+      .exit {
+        color: #F56C6C;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .welcome {
+        margin-right: 30px;
+        font-size: 14px;
+        span {
+          color: #409EFF;
+          font-size: 18px;
+        }
+      }
+    }
+    .message {
+        width: 100%;
+        height: 32px;
+        background-color: #f0f2f5;
+        box-shadow: inset 0 -1px 0 rgba( 255, 255, 250, 0.2), inset 0 -1px 0 rgba( 0, 0, 0, 0.1);
+        .news {
+          padding: 0 20px;
+          line-height: 32px;
+          cursor: pointer;
+          i.tag {
+            float: left;
+            margin-right: 10px;
+            color: #67C23A;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 32px;
+          }
+          span {
+            float: left;
+            color: #333333;
+            font-size: 12px;
+            &:last-child {
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+    .content {
+      min-height: calc(100vh - 140px);
+      background-color: #ffffff;
+    }
+    .footer {
+      width: 100%;
+      height: 60px;
+      background-color: #e2e2e2;
+      p {
+        color: #999999;
+        font-size: 12px;
+        text-align: center;
+        line-height: 60px;
+      }
+    }
+  }
+}
