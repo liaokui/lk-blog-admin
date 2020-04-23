@@ -1,5 +1,7 @@
 import ImgManage from '../../components/imgManage.vue'
 import Tinymce from '../../components/tinymce.vue'
+import { getProjectDetail, addProject, editProject, getTagList} from './project.service'
+import { getToken } from '../../utils/auth'
 
 export default {
   components: {
@@ -9,6 +11,9 @@ export default {
   data () {
     return {
       imgAction: '/api/upload',
+      imgHeaders: {
+        'Authorization': getToken()
+      },
       loading: false,
       editForm: {
         id: null,
@@ -63,40 +68,53 @@ export default {
       this.getDetail(this.id);
     } else {
       this.mode = 'add';
+      this.getTagList()
     }
   },
   methods: {
-    getDetail(id) {
-      // const params = {
-      //   'id': this.id
-      // }
-      let details = {
-        content: '<p>Welcome to Use Tinymce Editor</p><p>文章详情描述！</p><p><img class="wscnph" src="http://150.109.105.237:7001/public/uploads/dfa0e943fd590cb8db900bba6cab25ca.jpg" /></p>',
-        cover: "http://150.109.105.237:7001/public/uploads/46fa23ea8d48e73cfb743d623c3e6661.jpg",
-        tag: '1,2',
-        title: "cs",
-        githubAddress: 'www.baoidu.com',
-        showAddress: 'www.baoidu.com',
-        introduction: '项目简介项目简介项目简介项目简介项目简介项目简介',
+    // 获取标签列表
+    getTagList() {
+      this.tagList = []
+      getTagList().then(res => {
+        if (res && res.status === 'success') {
+          this.tagList = res.data.map( tag => {
+            return {
+              value: tag._id,
+              label: tag.tagName
+            }
+          })
+        }
+      }, error => {
+        this.message.error(error)
+        this.loading = false;
+      });
+    },
+    getDetail() {
+      const params = {
+        'id': this.id
       }
-      this.editForm.title = details.title
-      this.editForm.cover = details.cover
-      this.editForm.githubAddress = details.githubAddress
-      this.editForm.showAddress = details.showAddress
-      this.editForm.introduction = details.introduction
-      this.editForm.tag = details.tag.split(',').map( val => parseInt(val)) 
-      this.editForm.imgList = []
-      this.editForm.imgList.push({
-        name: '封面',
-        url: details.cover
-      })
-      this.editForm.content = details.content
-      // getCaptcha(params).then(res => {
-        
-      // }, error => {
-      //   this.message.error(error)
-      //   this.loading = false;
-      // });
+      getProjectDetail(params).then( async res => {
+        if (res && res.status === 'success') {
+          let details = res.data
+          this.editForm.title = details.title
+          this.editForm.cover = details.cover
+          this.editForm.githubAddress = details.githubAddress
+          this.editForm.showAddress = details.showAddress
+          this.editForm.introduction = details.introduction
+          this.editForm.imgList = []
+          this.editForm.imgList.push({
+            name: '封面',
+            url: details.cover
+          })
+          this.editForm.content = details.content
+          await this.getTagList()
+          this.editForm.tag = details.tagId.map(tag => {
+            return tag._id
+          })
+        }
+      }, error => {
+        this.message.error(error)
+      });
     },
     handleForm (form) {
       this.$refs[form].validate((valid) => {
@@ -106,24 +124,16 @@ export default {
             'githubAddress': this.editForm.githubAddress,
             'showAddress': this.editForm.showAddress,
             'introduction': this.editForm.introduction,
-            'tag': this.editForm.tag.join(','),
+            'tagId': this.editForm.tag,
             'content': this.editForm.content,
             'cover': this.editForm.cover,
           }
           console.log(params)
-          // addArticle(params).then(res => {
-          //   if (res.code === 200) {
-              
-          //   }
-          // }, error => {
-          //   this.message.error(error)
-          //   this.loading = false;
-          // });
-        if (this.mode === 'add') {
-            this.add(params);
+          if (this.mode === 'add') {
+              this.add(params);
           } else {
-            params.id = this.id;
-            this.edit(params);
+              params.id = this.id;
+              this.edit(params);
           }
         } else {
           return false;
@@ -131,10 +141,44 @@ export default {
       })
     },
     add (params) {
-      params
+      this.loading = true;
+      addProject(params).then(res => {
+        if (res && res.status === 'success') {
+          this.$message({
+            message: res.msg,
+            type: 'success'
+          })
+          this.loading = false;
+          this.resetForm()
+        }
+      }, error => {
+        this.message.error(error)
+        this.loading = false;
+      });
     },
     edit (params) {
-      params
+      this.loading = true;
+      editProject(params).then(res => {
+        if (res && res.status === 'success') {
+          this.$message({
+            message: res.msg,
+            type: 'success'
+          })
+          this.loading = false;
+          this.resetForm()
+          this.getDetail()
+        }
+      }, error => {
+        this.message.error(error)
+        this.loading = false;
+      });
+    },
+    // 表单内容和验证重置
+    resetForm() {
+      this.$refs['editForm'].resetFields();
+      this.editForm.imgList = []
+      this.editForm.githubAddress = null
+      this.editForm.showAddress = null
     },
     imgHandleChange(file, fileList) {
       this.editForm.imgList = fileList.slice();

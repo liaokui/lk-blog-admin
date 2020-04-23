@@ -1,8 +1,10 @@
+import { getTagList, createTag, removeTag} from './tag.service'
+
 export default {
   components: {},
   data () {
     return {
-      tagList: [],
+      list: [],
       tagVisible: false,
       tagValue: null,
     }
@@ -11,49 +13,35 @@ export default {
     this.getList()
   },
   methods: {
+    // 获取标签列表
     getList () {
-      this.tagList = []
-      this.tagList = [
-        {
-          label: '标签1',
-          value: 1
-        },
-        {
-          label: '标签2',
-          value: 2
-        },
-        {
-          label: '标签3',
-          value: 3
-        },
-        {
-          label: '标签4',
-          value: 4
+      this.list = []
+      getTagList().then(res => {
+        if (res && res.status === 'success') {
+          if (res.data && Array.isArray(res.data)) {
+            this.list = res.data.map((tag, index) => {
+              let type
+              if (index % 4 === 0) {
+                type = null
+              } else if (index % 4 === 1) {
+                type = 'success'
+              } else if (index % 4 === 2) {
+                type = 'warning'
+              } else {
+                type = 'danger'
+              }
+              return {
+                type,
+                ...tag
+              }
+            })
+          }
         }
-      ]
-      this.tagList = this.tagList.map((tag, index) => {
-        let type
-        if (index % 4 === 0) {
-           type = null
-        } else if (index % 4 === 1) {
-           type = 'success'
-        } else if (index % 4 === 2) {
-           type = 'warning'
-        } else {
-           type = 'danger'
-        }
-        return {
-          type,
-          ...tag
-        }
-      })
-      // getCaptcha(params).then(res => {
-        
-      // }, error => {
-      //   this.message.error(error)
-      //   this.loading = false;
-      // });
+      }, error => {
+        this.message.error(error)
+      });
     },
+    // 显示添加框
     showAddInput () {
       this.tagValue = null
       this.tagVisible = true
@@ -61,32 +49,40 @@ export default {
         this.$refs.saveTagInput.focus()
       }, 1)
     },
+    // 新增
     add () {
       if (this.tagValue) {
         const params = {
-          'tag': this.tagValue
+          'tagName': this.tagValue
         }
-        // getCaptcha(params).then(res => {
-          
-        // }, error => {
-        //   this.message.error(error)
-        //   this.loading = false;
-        // });
-        console.log(params)
+        createTag(params).then(res => {
+          if (res && res.status === 'success') {
+            this.getList()
+            this.$message({
+              message: res.msg,
+              type: 'success'
+            })
+          }
+        });
         this.tagVisible = false
       }
     },
+    // 删除
     del (id) {
       const params = {
         'id': id
       }
-      console.log(params)
-      // getCaptcha(params).then(res => {
-        
-      // }, error => {
-      //   this.message.error(error)
-      //   this.loading = false;
-      // });
+      removeTag(params).then(res => {
+        if (res && res.status === 'success') {
+          this.getList()
+          this.$message({
+            message: res.msg,
+            type: 'success'
+          })
+        }
+      }, error => {
+        this.message.error(error)
+      });
     },
     init () {
     }

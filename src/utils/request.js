@@ -33,7 +33,7 @@ service.interceptors.request.use(config => {
   }
   // 接口带上token
   if ((config.noToken === undefined || !config.noToken) && getToken()) {
-    config.headers['Authorization'] = 'Bearer ' + getToken(); 
+    config.headers['Authorization'] = getToken(); 
   }
   delete config.noToken;
   return config;

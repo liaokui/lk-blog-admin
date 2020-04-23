@@ -1,19 +1,10 @@
 import request from '@/utils/request'
 
-// 分页查询提现记录
-export function getPage(params) {
+// 获取留言列表
+export function getMessageList(params) {
   return request({
-    url: '/scene/describeSceneByPage',
-    method: 'post',
-    data: params
-  });
-}
-
-//删除
-export function del(params) {
-  return request({
-    url: '/modelProduct',
-    method: 'delete',
+    url: '/api/message/find',
+    method: 'get',
     params
-  })
+  });
 }

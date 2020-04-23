@@ -12,12 +12,13 @@ import './assets/icon/iconfont.css'
 import {
   Button, Card, Form, FormItem, Input, Loading, Message, Menu, MenuItem, Scrollbar, Breadcrumb,
   BreadcrumbItem, Table, TableColumn, Pagination, Tag, RadioGroup, RadioButton, Upload, Select,
-  Option, Progress, Dialog, Row, Col,
+  Option, Progress, Dialog, Row, Col
 } from 'element-ui';
 // import 'normalize.css'
 
 import * as filters from './utils/filters'
-
+import { getToken } from './utils/auth'
+ 
 Vue.prototype.$ELEMENT = { zIndex: 3000 };
 // Vue.prototype.$ELEMENT = { size: 'defalut', zIndex: 3000 };
 Vue.use(Button)
@@ -54,6 +55,19 @@ Vue.config.productionTip = false
 // register global utility filters
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
+})
+
+// 全局前置守卫
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/login') {
+     if (getToken()) {
+        next()
+      } else {
+        next({ path: '/login' })
+      }
+  } else {
+    next()
+  }
 })
 
 new Vue({

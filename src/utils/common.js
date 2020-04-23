@@ -5,7 +5,7 @@ const StatusList = [
     showType: 'info'
   },
   {
-    label: '完成',
+    label: '已发表',
     value: 1,
     showType: 'success'
   }

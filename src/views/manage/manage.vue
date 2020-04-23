@@ -58,9 +58,9 @@
         <div class="message">
             <p class="news clearfix">
               <i class="iconfont iconmessage tag"></i>
-              <span>LELK</span>
-              <span>(1947549029@qq.com)</span>
-              <span>-2020.04.11</span>
+              <span>{{ message.nickname }}</span>
+              <span>({{ message.email }})</span>
+              <span>[{{ message.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}]</span>
               <span>留言  <i class="el-icon-arrow-right"></i></span>
             </p>
         </div> 

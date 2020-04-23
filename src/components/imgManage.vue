@@ -98,7 +98,7 @@
       },
       uploadHeaders(){
 				return this.isHeader ? {
-					'Authorization': 'Bearer ' + getToken(),
+					'Authorization': getToken(),
 				} : {}
       },
       word() {

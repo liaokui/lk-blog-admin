@@ -33,6 +33,7 @@
 					<el-upload
 							class="upload-demo"
 							:action="imgAction"
+              :headers="imgHeaders"
 							:on-change="imgHandleChange"
 							:on-success="imgHandleSuccess"
 							:on-remove="imgHandleRemove"

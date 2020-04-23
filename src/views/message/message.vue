@@ -3,7 +3,7 @@
     <div class="search">
       <el-form label-width="60px" :inline="true">
         <el-form-item label="关键词:">
-					<el-input placeholder="请输入内容" size="small" v-model="search.keyword"></el-input>
+					<el-input placeholder="请输入内容" clearable size="small" v-model="search.keyword"></el-input>
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" size="small" @click="getPage(1)">搜索</el-button>
@@ -12,15 +12,15 @@
     </div>
     <div class="table">
       <el-table v-loading="loading" :data="list" border fit highlight-current-row style="width: 100%">
-        <el-table-column align="center" label="ID" width="80">
+        <el-table-column align="center" label="ID" width="210">
           <template slot-scope="scope">
-            <span>{{ scope.row.id }}</span>
+            <span>{{ scope.row._id }}</span>
           </template>
         </el-table-column>
 
         <el-table-column width="160px" align="center" label="时间">
           <template slot-scope="scope">
-            <span>{{ scope.row.time | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+            <span>{{ scope.row.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
           </template>
         </el-table-column>
 
@@ -44,7 +44,7 @@
 
         <el-table-column align="center" label="操作" width="120">
           <template slot-scope="scope">
-            <el-button type="danger" size="small" icon="el-icon-delete" @click="del(scope.row.is)">删除</el-button>
+            <el-button type="danger" size="mini" @click="del(scope.row._id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

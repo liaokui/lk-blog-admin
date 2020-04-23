@@ -1,4 +1,4 @@
-import { getList } from './message.service'
+import { getMessageList, removeMessage } from './message.service'
 
 export default {
   components: {},
@@ -11,7 +11,7 @@ export default {
       },
       page: {
         num: 1,
-        size: 20,
+        size: 10,
         total: 0,
       },
     }
@@ -20,40 +20,47 @@ export default {
     this.getPage(1);
   },
   methods: {
+    // 分页获取留言列表
     getPage (page) {
       this.page.num = page ? page : this.page.num;
       this.list = [];
       let params = {
         keyword: this.search.keyword,
         pageSize: this.page.size,
-        pageNumber: this.page.num - 1,
+        pageNumber: this.page.num,
       };
-      // this.loading = true;
-      // getList(params).then(res => {
-        // if (res && res.list && Array.isArray(res.list)) {
-        //   this.list = res.list.map( item => {
-        //     return item
-        //   })
-        this.list.push({
-          id: 1,
-          nickname: 'lelk',
-          email: '1947549029@qq.com',
-          time: 1548221490638,
-          message: '有事找你，收到请回复！'
-        })
-      this.page.total = 1;
-          // this.page.total = res.total;
-      //     this.loading = false;
-      //   // }
-      // }, error => {
-      //   this.loading = false;
-      //   this.$message.error(error);
-      // });
+      this.loading = true;
+      getMessageList(params).then(res => {
+        if (res && res.status === 'success') {
+          if (res.data && res.data.list && Array.isArray(res.data.list)) {
+            this.list = res.data.list.map(item => {
+              return item
+            })
+            this.page.total = res.data.count;
+            this.loading = false;
+          }
+        }
+      }, error => {
+        this.loading = false;
+        this.$message.error(error);
+      });
     },
+    // 删除留言
     del (id) {
       const params = {
         'id': id
       }
+      removeMessage(params).then(res => {
+        if (res && res.status === 'success') {
+          this.$message({
+            message: res.msg,
+            type: 'success'
+          })
+          this.getPage(1)
+        }
+      }, error => {
+        this.message.error(error)
+      });
     },
     init () {
     }

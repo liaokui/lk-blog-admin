@@ -1,0 +1,105 @@
+#home{
+  padding: 20px;
+  .total {
+    padding: 20px;
+    border-radius: 4px;
+    .info {
+      width: 50px;
+      float: left;
+      p.title {
+        font-size: 14px;
+        line-height: 20px;
+      }
+      p.num {
+        margin-top: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 30px;
+      }
+    }
+    .icon {
+      float: right;
+      i {
+        color: #dddfeb;
+        font-size: 40px;
+        line-height: 60px;
+      }
+    }
+  }
+  .date {
+    .time {
+      width: 100%;
+      .left {
+        width: 50%;
+        float: left;
+        .md {
+          display: block;
+          width: 70px;
+          margin: 15px auto;
+          border: 2px solid #67c23a;
+          .month {
+            width: 100%;
+            position: relative;
+            color: #ffffff;
+            font-size: 14px;
+            text-align: center;
+            line-height: 20px;
+            background-color: #67c23a;
+            &::before, &::after {
+              content: '|';
+              display: block;
+              position: absolute;
+              color: #36b9cc;
+              font-weight: 900;
+              top: -13px;
+            }
+            &::before {
+              right: 10px;
+            }
+             &::after {
+              left: 10px;
+            }
+          }
+          .day {
+            padding-top: 10px;
+            color: #67c23a;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 35px;
+          }
+          .week{
+            padding-bottom: 5px;
+            color: #67c23a;
+            font-size: 12px;
+            text-align: center;
+            line-height: 20px;
+          }
+        }
+      }
+      .right {
+        width: 50%;
+        float: left;
+        border-left: 1px solid #ccc;
+        p {
+          color: #4e73df;
+          font-size: 30px;
+          font-weight: bold;
+          text-align: center;
+          line-height: 120px;
+        }
+      }
+    }
+  }
+  .chartBox {
+    margin-top: 30px;
+    #pieChart {
+      width: 100%;
+			height: 360px;
+    }
+    #linearChart{
+      width: 100%;
+			height: 360px;
+    }
+  }
+}

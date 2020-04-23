@@ -1,4 +1,4 @@
-import { getList } from './project.service'
+import { getProjectList, removeProject, publishProject } from './project.service'
 import { StatusList } from '../../utils/common'
 
 export default {
@@ -13,7 +13,7 @@ export default {
       },
       page: {
         num: 1,
-        size: 20,
+        size: 10,
         total: 0,
       },
     }
@@ -39,60 +39,67 @@ export default {
     this.getPage(1);
   },
   methods: {
-    getPage (page) {
+    // 分页获取项目列表
+    getPage(page) {
       this.page.num = page ? page : this.page.num;
       this.list = [];
       let params = {
+        keyword: this.search.keyword,
         status: this.search.status,
         pageSize: this.page.size,
-        pageNumber: this.page.num - 1,
+        pageNumber: this.page.num,
       };
-      // this.loading = true;
-      // getList(params).then(res => {
-        // if (res && res.list && Array.isArray(res.list)) {
-        //   this.list = res.list.map( item => {
-        //     return item
-        //   })
-        this.list.push({
-          id: 1,
-          title: '项目不知道如何做性能优化？不妨试一下代码分割',
-          time: 1548221490638,
-          githubAddress: 'www.baoidu.com',
-          showAddress: 'www.baoidu.com',
-          introduction: '项目简介项目简介项目简介项目简介项目简介项目简介',
-          status: 1,
-          tag: [
-            {
-              label: 'HTML',
-              value: 1
-            },
-            {
-              label: 'CSS',
-              value: 2
-            },
-            {
-              label: 'JavaScript',
-              value: 3
-            },
-            {
-              label: 'Vue',
-              value: 4
-            },
-            {
-              label: 'Element-ui',
-              value: 5
-            },
-          ],
-          cover: 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png'
-        })
-      this.page.total = 1;
-          // this.page.total = res.total;
-      //     this.loading = false;
-      //   // } 
-      // }, error => {
-      //   this.loading = false;
-      //   this.$message.error(error);
-      // });
+      this.loading = true;
+      getProjectList(params).then(res => {
+        if (res && res.status === 'success') {
+          if (res.data && res.data.list && Array.isArray(res.data.list)) {
+            this.list = res.data.list.map( item => {
+              return item
+            })
+            this.page.total = res.data.count;
+            this.loading = false;
+          }
+        }
+      }, error => {
+        this.loading = false;
+        this.$message.error(error);
+      });
+    },
+    // 删除项目
+    del (id) {
+      const params = {
+        'id': id
+      }
+      removeProject(params).then(res => {
+        if (res && res.status === 'success') {
+          this.getPage()
+          this.$message({
+            message: res.msg,
+            type: 'success'
+          })
+        }
+      }, error => {
+        this.message.error(error)
+      });
+    },
+    // 发布 or 撤销发布
+    publish(id, status) {
+      const params = {
+        'id': id,
+        'status': status,
+      }
+      publishProject(params).then(res => {
+        if (res && res.status === 'success') {
+          this.$message({
+            message: res.msg,
+            type: 'success'
+          })
+          this.getPage(1)
+        }
+      }, error => {
+        this.message.error(error)
+        this.loading = false;
+      });
     },
     init () {
     }

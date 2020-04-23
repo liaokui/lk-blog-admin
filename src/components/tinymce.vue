@@ -104,7 +104,6 @@ export default {
       let that = this
       tinymce.PluginManager.add('uploadImg', function(editor) {
         var openDialog = function () {
-            console.log(1111)
             that.openDialog()
         };
         
@@ -144,7 +143,6 @@ export default {
       this.imgList = []
     },
     addImg() {
-      console.log(this.imgList)
       this.imageSuccessCBK(this.imgList)
       this.closeDialog()
     },
