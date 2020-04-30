@@ -1,5 +1,6 @@
 <template>
   <div id='login'>
+    <p class="title">LK-blog后台管理</p>
     <el-card class="box-card loginCard">
       <p class="title">登录</p>
       <el-form :model="loginForm"

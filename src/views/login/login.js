@@ -67,12 +67,14 @@ export default {
                 message: res.msg,
                 type: 'warning'
               })
+              this.getCode()
             }
           }, () => {
             this.$message({
               message: '请求失败!',
               type: 'error'
             })
+            this.getCode()
             this.loading = false;
           });
         } else {

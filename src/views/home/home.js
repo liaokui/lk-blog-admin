@@ -59,7 +59,6 @@ export default {
     },
     initPieChart() {
       const pieChart = echarts.init(document.getElementById('pieChart'))
-      console.log(this.dataList.map( item => item.label ))
       const pieObj = {
         tooltip: {
             trigger: 'item',

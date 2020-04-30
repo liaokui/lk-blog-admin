@@ -1,4 +1,4 @@
-import { removeToken, removeUid } from '../../utils/auth'
+import { removeToken, removeUid, removeUsername } from '../../utils/auth'
 import { getMessageList } from './manage.server'
 
 export default {
@@ -48,6 +48,7 @@ export default {
     },
     signOut () {
       removeToken()
+      removeUsername()
       removeUid()
       this.$router.push({path: '/login'});
     }
