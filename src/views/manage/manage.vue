@@ -10,26 +10,37 @@
                 active-text-color="#409EFF"
                 mode="vertical"
                 @select="handleSelect">
-            <el-menu-item index="home">
+            
+            <router-link :to="{'path': '/manage/home'}">
+              <el-menu-item index="home">
                 <i class="iconfont iconhome menuIcon"></i>
-                <router-link :to="{'path': '/manage/home'}">首页</router-link>
-            </el-menu-item>
-            <el-menu-item index="article">
-              <i class="iconfont iconarticle menuIcon"></i>
-              <router-link :to="{'path': '/manage/article'}">文章管理</router-link>
-            </el-menu-item>
-            <el-menu-item index="project">
-              <i class="iconfont iconproject menuIcon"></i>
-              <router-link :to="{'path': '/manage/project'}">项目管理</router-link>
-            </el-menu-item>
-            <el-menu-item index="message">
-              <i class="iconfont iconmessage menuIcon"></i>
-              <router-link :to="{'path': '/manage/message'}">留言管理</router-link>
-            </el-menu-item>
-            <el-menu-item index="tag">
-              <i class="iconfont icontag menuIcon"></i>
-              <router-link :to="{'path': '/manage/tag'}">标签管理</router-link>
-            </el-menu-item>
+                首页
+              </el-menu-item>
+            </router-link>
+            <router-link :to="{'path': '/manage/article'}">
+              <el-menu-item index="article">
+                <i class="iconfont iconarticle menuIcon"></i>
+                文章管理
+              </el-menu-item>
+            </router-link>
+            <router-link :to="{'path': '/manage/project'}">
+              <el-menu-item index="project">
+                <i class="iconfont iconproject menuIcon"></i>
+                项目管理
+              </el-menu-item>
+            </router-link>
+            <router-link :to="{'path': '/manage/message'}">
+              <el-menu-item index="message">
+                <i class="iconfont iconmessage menuIcon"></i>
+                留言管理
+              </el-menu-item>
+            </router-link>
+            <router-link :to="{'path': '/manage/tag'}">
+              <el-menu-item index="tag">
+                <i class="iconfont icontag menuIcon"></i>
+                标签管理
+              </el-menu-item>
+            </router-link>
           </el-menu>
       </el-scrollbar>
     </div>
@@ -56,6 +67,7 @@
           </div>
         </div>
         <div class="message">
+          <router-link :to="{'path': '/manage/message'}">
             <p class="news clearfix">
               <i class="iconfont iconmessage tag"></i>
               <span>{{ message.nickname }}</span>
@@ -63,6 +75,7 @@
               <span>[{{ message.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}]</span>
               <span>留言  <i class="el-icon-arrow-right"></i></span>
             </p>
+          </router-link>
         </div> 
         <div class="content">
           <router-view></router-view>

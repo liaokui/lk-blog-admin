@@ -72,17 +72,29 @@ export default {
       const params = {
         'id': id
       }
-      removeTag(params).then(res => {
-        if (res && res.status === 'success') {
-          this.getList()
-          this.$message({
-            message: res.msg,
-            type: 'success'
-          })
-        }
-      }, error => {
-        this.message.error(error)
+      this.$confirm('此操作将删除该标签, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        removeTag(params).then(res => {
+          if (res && res.status === 'success') {
+            this.getList()
+            this.$message({
+              message: res.msg,
+              type: 'success'
+            })
+          }
+        }, error => {
+          this.message.error(error)
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
       });
+      
     },
     init () {
     }

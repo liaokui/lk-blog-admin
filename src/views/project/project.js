@@ -70,16 +70,27 @@ export default {
       const params = {
         'id': id
       }
-      removeProject(params).then(res => {
-        if (res && res.status === 'success') {
-          this.getPage()
-          this.$message({
-            message: res.msg,
-            type: 'success'
-          })
-        }
-      }, error => {
-        this.message.error(error)
+      this.$confirm('此操作将删除该项目, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        removeProject(params).then(res => {
+          if (res && res.status === 'success') {
+            this.getPage()
+            this.$message({
+              message: res.msg,
+              type: 'success'
+            })
+          }
+        }, error => {
+          this.message.error(error)
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
       });
     },
     // 发布 or 撤销发布

@@ -12,7 +12,7 @@ import './assets/icon/iconfont.css'
 import {
   Button, Card, Form, FormItem, Input, Loading, Message, Menu, MenuItem, Scrollbar, Breadcrumb,
   BreadcrumbItem, Table, TableColumn, Pagination, Tag, RadioGroup, RadioButton, Upload, Select,
-  Option, Progress, Dialog, Row, Col
+  Option, Progress, Dialog, Row, Col, MessageBox
 } from 'element-ui';
 // import 'normalize.css'
 
@@ -47,6 +47,7 @@ Vue.use(Row)
 Vue.use(Col)
 
 Vue.prototype.$message = Message;
+Vue.prototype.$confirm = MessageBox.confirm;
 
 Vue.config.productionTip = false
 
