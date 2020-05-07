@@ -47,6 +47,7 @@ export default {
     }
   },
   created () {
+    console.log(process.env.VUE_APP_imgReadUrl)
     if (this.$route.query && this.$route.query.id) {
       this.id = this.$route.query.id;
       this.mode = 'edit';
