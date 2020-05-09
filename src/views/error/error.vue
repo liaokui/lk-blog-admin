@@ -2,7 +2,7 @@
     <div id="error">
         <div class="block">
             <span @click="reload()"><i class="icon iconfont icon-ai245"></i>刷新</span>
-            <router-link :to="{path: '/admin'}"><i class="icon iconfont icon-web-icon-"></i>返回首页</router-link>
+            <router-link :to="{path: '/'}"><i class="icon iconfont icon-web-icon-"></i>返回首页</router-link>
         </div>
     </div>
 </template>

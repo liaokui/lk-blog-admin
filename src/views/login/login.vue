@@ -12,13 +12,13 @@
                     placeholder="用户名"></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="loginForm.password"
+          <el-input type="password" v-model="loginForm.password"
                     placeholder="密码"></el-input>
         </el-form-item>
         <el-form-item>
           <div class="validateBox clearfix">
             <el-input v-model="loginForm.code"
-                      placeholder="验证码">
+                      placeholder="验证码" @keyup.enter.native="handleForm('loginForm')">
               <template slot="append">
                 <span v-html="codeHtml" @click="getCode()"></span>
               </template>
